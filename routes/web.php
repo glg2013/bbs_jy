@@ -1,14 +1,9 @@
 <?php
 
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Auth\ConfirmPasswordController;
-use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +43,5 @@ Auth::routes(['verify' => true]);
 //Route::get('email/verify', [VerificationController::class, 'show'])->name('verification.notice');
 //Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 //Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+
+Route::resource('users', UsersController::class)->only(['show', 'update', 'edit']);
