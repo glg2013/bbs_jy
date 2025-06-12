@@ -45,3 +45,5 @@ Auth::routes(['verify' => true]);
 //Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 Route::resource('users', UsersController::class)->only(['show', 'update', 'edit']);
+
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
