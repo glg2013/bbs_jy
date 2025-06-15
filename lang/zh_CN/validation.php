@@ -133,4 +133,8 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+    'attributes'           => [
+        'title' => '标题',
+        'body' => '内容',
+    ]
 ];
