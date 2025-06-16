@@ -49,6 +49,6 @@ class Topic extends Model
 
     public function link($params = [])
     {
-        return route('topics.show', array_merge([$this->getAttributeValue('id'), $this->getAttributeValue('slug')], $params));
+        return route('topics.show', array_merge([$this->id, $this->slug], $params));
     }
 }

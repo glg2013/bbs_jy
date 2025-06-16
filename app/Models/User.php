@@ -56,6 +56,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAuthorOf(Topic $model): bool
     {
-        return $this->getAttributeValue('id') == $model->getAttributeValue('user_id');
+        return $this->id === $model->user_id;
     }
 }

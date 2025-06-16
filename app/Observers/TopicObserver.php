@@ -23,15 +23,15 @@ class TopicObserver
     public function saving(Topic $topic)
     {
         // XSS 过滤
-        $topic->setAttribute('body', clean($topic->getAttribute('body'), 'user_topic_body'));
+        $topic->body = clean($topic->body, 'user_topic_body');
         //$topic->body = clean($topic->body, 'user_topic_body');
 
         // 生成话题摘录
-        $topic->setAttribute('excerpt', make_excerpt($topic->getAttributeValue('body')));
+        $topic->excerpt = make_excerpt($topic->body);
 
         // 如果 slug 字段无内容，即使用翻译器对 title 进行翻译
-        if (! $topic->getAttributeValue('slug')) {
-            $topic->setAttribute('slug', app(SlugTranslateHandler::class)->translate($topic->getAttributeValue('title')));
+        if (! $topic->slug) {
+            $topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
         }
     }
 }

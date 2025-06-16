@@ -48,7 +48,7 @@ class TopicsController extends Controller
 	public function store(TopicRequest $request, Topic $topic)
 	{
 		$topic->fill($request->all());
-        $topic->setAttribute('user_id', Auth::id());
+        $topic->user_id = Auth::id();
         $topic->save();
 		return redirect()->to($topic->link())->with('message', '帖子创建成功！');
 	}
