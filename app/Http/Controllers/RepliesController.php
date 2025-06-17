@@ -20,7 +20,11 @@ class RepliesController extends Controller
 		$reply->content = $request->content;
         $reply->user_id = Auth::id();
         $reply->topic_id = $request->topic_id;
-        $reply->save();
+        $result = $reply->save();
+        if (!$result) {
+            session()->flash('danger', '内容为空或者含有非法字符！');
+            return redirect()->back()->withInput();
+        }
 
         return redirect()->to($reply->topic->link())->with('success', '评论创建成功！');
 	}
