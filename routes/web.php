@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\TopicsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -55,4 +56,4 @@ Route::resource('categories', CategoriesController::class)->only(['show']);
 
 Route::post('upload_image', [TopicsController::class, 'uploadImage'])->name('topics.upload_image');
 
-Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::resource('replies', RepliesController::class)->only(['store', 'destroy']);
