@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\TopicsController;
@@ -57,3 +58,5 @@ Route::resource('categories', CategoriesController::class)->only(['show']);
 Route::post('upload_image', [TopicsController::class, 'uploadImage'])->name('topics.upload_image');
 
 Route::resource('replies', RepliesController::class)->only(['store', 'destroy']);
+
+Route::resource('notifications', NotificationsController::class)->only(['index']);
