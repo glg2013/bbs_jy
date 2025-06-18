@@ -60,3 +60,7 @@ Route::post('upload_image', [TopicsController::class, 'uploadImage'])->name('top
 Route::resource('replies', RepliesController::class)->only(['store', 'destroy']);
 
 Route::resource('notifications', NotificationsController::class)->only(['index']);
+
+Route::get('/suser', function () {
+    dd(Auth::user()->hasRole('Founder'));
+});
