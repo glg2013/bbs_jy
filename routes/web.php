@@ -64,3 +64,6 @@ Route::resource('notifications', NotificationsController::class)->only(['index']
 Route::get('/suser', function () {
     dd(Auth::user()->hasRole('Founder'));
 });
+
+// 无权限提醒页面
+Route::get('permission-denied', [PagesController::class, 'permissionDenied'])->name('permission-denied');
