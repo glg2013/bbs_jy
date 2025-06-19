@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             TopicsTableSeeder::class,
             RepliesTableSeeder::class,
+            LinksTableSeeder::class,
         ]);
     }
 }
