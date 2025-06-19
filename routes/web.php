@@ -20,7 +20,8 @@ use App\Http\Controllers\UsersController;
 |
 */
 
-Route::get('/', [PagesController::class, 'root'])->name('root');
+//Route::get('/', [PagesController::class, 'root'])->name('root');
+Route::get('/', [TopicsController::class, 'index'])->name('root');
 
 Auth::routes(['verify' => true]);
 
