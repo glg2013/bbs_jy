@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\VerificationCodeRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Overtrue\EasySms\EasySms;
 
 class VerificationCodesController extends Controller
 {
