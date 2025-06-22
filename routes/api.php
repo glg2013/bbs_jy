@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CaptchasController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VerificationCodesController;
 use Illuminate\Support\Facades\Route;
@@ -28,9 +29,15 @@ Route::prefix('v1')->name('api.v1.')->group(function() {
 
         // 用户注册
         Route::post('users', [UsersController::class, 'store'])->name('users.store');
+
+        // 图片验证码
+        Route::post('captchas', [CaptchasController::class, 'store'])->name('captchas.store');
     });
 
     Route::middleware('throttle:' . config('api.rate_limits.access'))->group(function () {
-
+        Route::get('info', function () {
+            //echo 123;
+            dd(config('api.rate_limits'));
+        });
     });
 });

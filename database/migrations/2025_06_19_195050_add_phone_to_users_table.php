@@ -14,11 +14,12 @@ return new class extends Migration
      */
     public function up()
     {
-        // 添加 phone 列
-        DB::statement("ALTER TABLE users ADD COLUMN phone VARCHAR(255) NULL UNIQUE AFTER name");
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('phone')->nullable()->unique()->after('password');
+        });
 
-        // 修改 email 列可为空
-        DB::statement("ALTER TABLE users MODIFY email VARCHAR(255) NULL");
+        // 使用原始 SQL 替代 change() 方法
+        DB::statement('ALTER TABLE users MODIFY email VARCHAR(255) NULL');
     }
 
     /**
@@ -28,16 +29,14 @@ return new class extends Migration
      */
     public function down()
     {
-        // 删除 phone 列
-        DB::statement("
-            ALTER TABLE users
-            DROP COLUMN phone
-        ");
+        Schema::table('users', function (Blueprint $table) {
+            // 仅在列存在时删除
+            if (Schema::hasColumn('users', 'phone')) {
+                $table->dropColumn('phone');
+            }
+        });
 
-        // 恢复 email 列为不可空
-        DB::statement("
-            ALTER TABLE users
-            MODIFY email VARCHAR(255) NOT NULL
-        ");
+        // 使用原始 SQL 替代 change() 方法
+        DB::statement('ALTER TABLE users MODIFY email VARCHAR(255) NOT NULL');
     }
 };
