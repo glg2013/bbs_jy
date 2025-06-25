@@ -46,7 +46,7 @@ class VerificationCodesController extends Controller
             }
         }
 
-        $smsKey = 'verificationCode_'.Str::random(15);
+        $smsKey = Str::random(15);
         $smsCacheKey = 'verificationCode_'.$smsKey;
         $expiredAt = now()->addMinutes(5);
         // 缓存验证码 5分钟过期。
