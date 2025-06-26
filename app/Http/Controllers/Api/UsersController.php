@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\Api\UserRequest;
@@ -33,6 +34,18 @@ class UsersController extends Controller
         // 清除验证码缓存
         \Cache::forget($cacheKey);
 
+        return (new UserResource($user))->showSensitiveFields();
+    }
+
+
+    public function show(User $user, Request $request)
+    {
         return new UserResource($user);
     }
+
+    public function me(Request $request)
+    {
+        return (new UserResource($request->user()))->showSensitiveFields();
+    }
+
 }

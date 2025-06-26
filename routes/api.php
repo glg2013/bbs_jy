@@ -50,9 +50,15 @@ Route::prefix('v1')->name('api.v1.')->group(function() {
     });
 
     Route::middleware('throttle:' . config('api.rate_limits.access'))->group(function () {
-        Route::get('info', function () {
-            //echo 123;
-            dd(config('api.rate_limits'));
+        // 游客可以访问的接口
+
+        // 某个用户的详情
+        Route::get('users/{user}', [UsersController::class, 'show'])->name('users.show');
+
+        // 登录后可以访问的接口
+        Route::middleware('auth:api')->group(function () {
+            // 当前登录用户信息
+            Route::get('user', [UsersController::class, 'me'])->name('user.show');
         });
     });
 });
