@@ -6,15 +6,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TopicResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
-        //return parent::toArray($request);
         return [
             'id' => $this->id,
             'title' => $this->title,
@@ -29,6 +22,8 @@ class TopicResource extends JsonResource
             'slug' => $this->slug,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'user' => new UserResource($this->whenLoaded('user')),
+            'category' => new CategoryResource($this->whenLoaded('category')),
         ];
     }
 }
