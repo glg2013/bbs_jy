@@ -12,10 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements MustVerifyEmail, JWTSubject
+class User extends Authenticatable implements MustVerifyEmail
 {
     use LastActivedAtHelper;
 
@@ -52,13 +51,10 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
      */
     protected $fillable = [
         'name',
-        'phone',
         'email',
         'password',
         'introduction',
         'avatar',
-        'weixin_openid',
-        'weixin_unionid',
     ];
 
     /**
@@ -69,8 +65,6 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
-        'weixin_openid',
-        'weixin_unionid',
     ];
 
     /**
@@ -130,18 +124,5 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         }
 
         $this->attributes['avatar'] = $path;
-    }
-
-
-    public function getJWTIdentifier()
-    {
-        // TODO: Implement getJWTIdentifier() method.
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        // TODO: Implement getJWTCustomClaims() method.
-        return [];
     }
 }
